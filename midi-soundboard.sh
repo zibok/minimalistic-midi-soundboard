@@ -1,10 +1,13 @@
 #!/bin/bash
 
 if [ $# -lt 1 ]; then
-  echo "Usage: $0 <midi-port>"
+  echo "Usage: $0 <midi-client> [<pipewire-sink-name>]"
+  echo "  - <midi-client>: name of the client shown by aseqdump -l"
+  echo "  - <pipewire-sink-name>: name of the sink to send sound to (defaults: media)"
 fi
 
-MIDI_PORT="$1"
+MIDI_CLIENT="$1"
+PIPEWIRE_SINK_NAME="${2:-media}"
 
 PROJECT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -20,10 +23,10 @@ launch_sound() {
   volume="${volumeMapping["${midi_channel}-${midi_key_id}"]}"
   volume="${volume:-1,0}"
 
-  pw-play --target media "$file" --volume="$volume"
+  pw-play --target "${PIPEWIRE_SINL_NAME}" "$file" --volume="$volume"
 }
 
-aseqdump -p "${MIDI_PORT}" |
+aseqdump -p "${MIDI_CLIENT}" |
 {
   # We ignore the first two lines of aseqdump output
   # Like
