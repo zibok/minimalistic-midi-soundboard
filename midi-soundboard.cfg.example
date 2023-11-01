@@ -1,0 +1,13 @@
+declare -A soundMapping
+declare -A volumeMapping
+
+# Map key is the combination of MIDI channel, "-" and the key ID
+
+# Example: to trigger a file for the key 40 on MIDI channel 9
+#soundMapping["9-40"]="/path/to/audio.file"
+
+# Volume value uses the current locale (LC_NUMERIC) of your system,
+# so for example, in fr_FR, the separator is a comma
+# If not specified, it will use 1,0 by default 
+#volumeMapping["9-41"]="0,5"
+
