@@ -23,7 +23,7 @@ launch_sound() {
   volume="${volumeMapping["${midi_channel}-${midi_key_id}"]}"
   volume="${volume:-1,0}"
 
-  pw-play --target "${PIPEWIRE_SINL_NAME}" "$file" --volume="$volume"
+  pw-play --target "${PIPEWIRE_SINK_NAME}" "$file" --volume="$volume"
 }
 
 aseqdump -p "${MIDI_CLIENT}" |
